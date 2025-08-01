@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kamchatka Earthquake M8.8 - Damage Assessment</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'earthquake': {
+                            'high': '#dc2626',
+                            'medium': '#f59e0b',
+                            'low': '#10b981'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-900 text-white font-sans overflow-hidden">
+    <!-- Header -->
+    <header class="bg-gray-800 border-b border-gray-700 px-6 py-3 flex justify-between items-center relative z-50">
+        <div class="flex items-center space-x-4">
+            <div class="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+            <h1 class="text-xl font-bold">Kamchatka Earthquake M8.8</h1>
+            <span class="text-sm text-gray-400">July 30, 2025</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div class="text-sm">
+                <span class="text-gray-400">Status:</span>
+                <span class="text-red-400 font-semibold">Active Emergency</span>
+            </div>
+            <div class="text-sm">
+                <span class="text-gray-400">Last Update:</span>
+                <span class="text-white">12:30 UTC</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-80 bg-gray-800 border-r border-gray-700 overflow-y-auto" style="height: calc(100vh - 64px); max-height: calc(100vh - 64px);">
+            <div class="h-full overflow-y-auto">
+            <!-- Earthquake Info Panel -->
+            <div class="p-6 border-b border-gray-700">
+                <h2 class="text-lg font-semibold mb-4 flex items-center">
+                    <div class="w-2 h-2 bg-red-500 rounded-full mr-2"></div>
+                    Earthquake Details
+                </h2>
+                <div class="space-y-3">
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Magnitude:</span>
+                        <span class="text-red-400 font-bold text-lg">8.8</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Depth:</span>
+                        <span class="text-white">29 km</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Location:</span>
+                        <span class="text-white text-sm">54.8°N, 162.0°E</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Region:</span>
+                        <span class="text-white text-sm">Off Kamchatka Peninsula</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Time:</span>
+                        <span class="text-white text-sm">18:10 UTC</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Damage Assessment -->
+            <div class="p-6 border-b border-gray-700">
+                <h2 class="text-lg font-semibold mb-4 flex items-center">
+                    <div class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
+                    Damage Assessment
+                </h2>
+                <div class="space-y-4">
+                    <!-- Casualties -->
+                    <div class="bg-gray-700 rounded-lg p-4">
+                        <h3 class="font-medium mb-2">Casualties</h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-green-400">0</div>
+                                <div class="text-xs text-gray-400">Deaths</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-yellow-400">12</div>
+                                <div class="text-xs text-gray-400">Injured</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Infrastructure -->
+                    <div class="bg-gray-700 rounded-lg p-4">
+                        <h3 class="font-medium mb-2">Infrastructure</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-400">Buildings Damaged:</span>
+                                <span class="text-red-400">47</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-400">Roads Affected:</span>
+                                <span class="text-yellow-400">8 km</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-400">Power Outages:</span>
+                                <span class="text-red-400">~15,000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tsunami Impact -->
+                    <div class="bg-gray-700 rounded-lg p-4">
+                        <h3 class="font-medium mb-2">Tsunami Impact</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-400">Max Wave Height:</span>
+                                <span class="text-blue-400">4.2 m</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-400">Affected Coastline:</span>
+                                <span class="text-blue-400">150 km</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-400">Warning Status:</span>
+                                <span class="text-yellow-400">Lifted</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Legend -->
+            <div class="p-6">
+                <h2 class="text-lg font-semibold mb-4 flex items-center">
+                    <div class="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                    Map Legend
+                </h2>
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-4 h-4 bg-red-500 rounded-full"></div>
+                        <span class="text-sm">Epicenter</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-4 h-4 border-2 border-red-400 rounded-full bg-red-400 bg-opacity-20"></div>
+                        <span class="text-sm">High Damage Zone (0-50km)</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-4 h-4 border-2 border-yellow-400 rounded-full bg-yellow-400 bg-opacity-20"></div>
+                        <span class="text-sm">Medium Risk Zone (50-150km)</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-4 h-4 border-2 border-green-400 rounded-full bg-green-400 bg-opacity-20"></div>
+                        <span class="text-sm">Low Risk Zone (150-300km)</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-4 h-4 bg-blue-500 rounded"></div>
+                        <span class="text-sm">Tsunami Affected Areas</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-4 h-4 bg-orange-500 rounded"></div>
+                        <span class="text-sm">Damaged Buildings</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Map Container -->
+        <main class="flex-1 relative">
+            <div id="map" class="w-full h-full"></div>
+            
+            <!-- Map Controls -->
+            <div class="absolute top-4 right-4 z-50 space-y-2">
+                <button id="toggleLayer" class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg shadow-lg transition-colors">
+                    Toggle Layers
+                </button>
+                <button id="fullscreen" class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg shadow-lg transition-colors">
+                    Fullscreen
+                </button>
+            </div>
+
+            <!-- Loading Overlay -->
+            <div id="loading" class="absolute inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-40">
+                <div class="text-center">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+                    <p class="text-white">Loading earthquake data...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script src="assets/js/earthquake-data.js"></script>
+    <script src="components/legend.js"></script>
+    <script src="components/info-panel.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
